@@ -1,0 +1,222 @@
+%Research Statement
+\documentclass[11pt]{article}
+\usepackage{amsmath,amsbsy,amsfonts,amscd,dsfont,graphicx,wrapfig,epsfig,float,hyperref,color,lastpage}
+\usepackage{fancyhdr,fullpage}
+\usepackage{ifthen} %For different heading first page
+%\usepackage{layout} %use this plus \layout after \begin{document} to see a layout diagram
+\usepackage[small]{caption} %small captions
+\usepackage[medium]{titlesec} %change section heading format
+\titleformat{\section} %This auto-kills the section numbers...
+[hang]% <shape>
+  {\normalfont\bfseries\Large}% <format>
+  {}% <label>
+  {0pt}% <sep>
+  {}% <before code>
+\renewcommand{\thesection}{}% Remove section references...
+\renewcommand{\thesubsection}{\arabic{subsection}}%numbers for subsections
+\titlelabel{\thetitle.\enspace} %\quad
+\usepackage{doi} %hyperlinks for doi
+%\usepackage[margin=1in]{geometry}
+%\usepackage{xy} %complex commutative diagrams, simple ones provided by amscd
+%%%%%%%%%%%%%%%%%%%%%
+\setlength{\headheight}{17pt}  %standard
+%\setlength{\topmargin}{0pt}
+\setlength{\headsep}{30pt}  %separation between header and body
+\addtolength{\headheight}{30pt} %15 per line (fat header)
+\setlength{\voffset}{-35pt}  %shift up the amount of headsep into header -- kills 1-inch top margin
+\addtolength{\textheight}{-25pt}  %shrink body size by extra width of header
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\graphicspath{{figures/}}
+
+\begin{document}
+\newcommand{\diag}{\mbox{diag}}
+\newcommand{\bv}[1]{\mathbf{#1}}
+\newcommand{\bsy}{\boldsymbol}
+\newcommand{\heavi}{\mathcal{H}}
+\fancyhf{}
+\lhead{\ifthenelse{\value{page}=1}{\ \\\Huge{\textsf{Research Statement}}\\ \small{\ }}{Research Statement}}
+%\chead{}
+\rhead{\ifthenelse{\value{page}=1}{\textbf{W. Christopher Strickland}\\
+        Department of Mathematics\\
+        University of North Carolina, Chapel Hill}{W. Christopher Strickland}}
+%\lfoot{}
+%\cfoot{}
+\rfoot{\thepage} %if \thepage is unspecified, pg # will be put in the center ft. if \cfoot{} is commented out
+\pagestyle{fancy}
+%Decorative lines separating head and foot.  pt size sets width
+%\renewcommand{\headrulewidth}{0.4pt}
+%\renewcommand{\footrulewidth}{0.4pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\thispagestyle{fancy} %Comment for 1st pg centered ft number only.  "fancy" for same as every other page.
+%%%%%%%%%%%%%%%%%%%%%
+
+\section{Summary of Research}
+%Make this an easy to read summary and introduction to the topics. Details come in sections.
+The focus of my research is to develop and analyze mathematical models that investigate the behavior of systems in biology and ecology. I am particularly interested in invasion dynamics and control strategies, species-environment interactions, and how population demographics can change over time in response to external drivers and community structure. My previous work includes modeling and analyzing the non-local spread of cheatgrass establishment in Rocky Mountain National Park, the time evolution of savanna tree composition in response to water resource availability and fire disturbance, and presently, the dispersal of parasitoid wasps from point release on the kilometer scale. The broad goal of my future work is to incorporate environmental conditions and dynamics, social network structure, and available field data into a probabilistic modeling framework that can inform risk management policy and aid in developing superior control strategies.
+
+The approach I use to study each of these problems is highly motivated by the scientific setting
+\begin{wrapfigure}{r}{0.5\textwidth}
+\vspace{-23pt}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{RMNP08_NetworkScaled.pdf}
+\caption{Presence probability of cheatgrass in Rocky Mountain National Park 9 years after initial presence data.}
+\label{fig:RMNP}
+\vspace{-20pt}
+\end{center}
+\end{wrapfigure}
+and can involve a diverse range of mathematical topics including scientific computing, probabilistic modeling, network theory, dynamical systems, and Bayesian model selection. The modeling approach I use is based on principles of analytical tractability and broad scientific utility. My methods are then typically computational in nature, with the goal of providing results that admit a direct comparison to data. This last facet of my work has also led me to start pursuing some aspects of data science, including managing large data sets, converting between formats, and conducting data manipulation and analysis in software such as the Python pandas library or the 3D visualization software VisIt \cite{Strickland_parasitoids,Strickland_macrophyte}. Throughout the research process, I collaborate closely with scientists to ensure that my work is contextually relevant and provides new, actionable insight into the mechanistic properties of the system we are studying.
+
+\section{Interdisciplinary Collaboration}
+
+My research is primarily inspired by scientific questions that in turn drive mathematical and computational innovation. As a result, scientific collaboration is a critical part of my research \cite{Strickland_review}. For example, most of my graduate research addresses a problem in mathematical ecology involving the spread of a biological invader through nonhomogeneous domains with an embedded human transportation network. This project relied heavily on a collaboration with ecologists Tom Stohlgren and Sunil Kumar that produced not only results addressing data on the spread of cheatgrass in Rocky Mountain National Park \cite{Strickland15} (Fig. \ref{fig:RMNP}), but also novel mathematics extending the work of Mollison \cite{Mollison77} to heterogeneous domains and species presence probability \cite{Strickland14}. In a current project, I am collaborating with Nadiah Kristensen, an ecologist, and Laura Miller, a biological fluid dynamicist, on a project that uses data driven mathematics to demonstrate the relative importance of air flow in modeling the kilometer-scale dispersal of tiny, wind-borne insects \cite{Strickland_parasitoids}. Future work includes incorporating these findings into modeling marine dispersal of small organisms with Virginia Pasour \cite{Strickland_macrophyte} and developing more accurate wind-based models.
+
+%%%%%%%%%%%%
+% A scientific computing section here for some jobs?
+%%%%%%%%%%%%
+
+\section{Current and Previous Work}
+
+\subsection{Modeling Invasive Plant Dispersal}
+
+Invasive species represent one of the major environmental threats of the $21^{\mbox{st}}$ Century. Damage to native species, habitat, and agricultural lands leads to economic suppression, reduced food and water security, and direct threats to human health \cite{Keller09}. Control costs rise dramatically with population size, so mathematical models of potential spread are essential to inform management strategies. However, the traditional approach of modeling invasive plant dispersal using a Fickian diffusion system with logistic growth \cite{Maruvka06,Skellam51} has been widely criticized because species dispersal in these models is assumed to be local, normally distributed, and uniform in all directions. In fact, dispersal mechanisms are often non-local with heavy-tailed distributions and dependent on environmental factors \cite{Furter89}.  Current mathematical models also routinely ignore uncertainty in initial conditions and neglect heterogeneity in the landscape. %\cite{Furter89,Kot86}
+
+Our work addresses these and other concerns by deriving and analyzing a new model for invasive spread based on the stochastic contact birth process introduced by Mollison called the ``simple epidemic'' (Eqn. \ref{eqn:transition-rate} in appendix) \cite{Mollison77}. In forming our model, we note that the quantity of interest for ecologists is often not the expected population size, but rather the probability that an invader will be present at all. This fact is reflected in available data, which is often in the form of spatial presence/absence points with no information about population density.
+By first extending the model to a spatially continuous formulation and then using the Master equation generated by the simple epidemic, we derived an intergo-differential equation for the probability that the population is greater than zero in any specified area (Eqn. \ref{eqn:suitmodel} in appendix). This new model includes landscape heterogeneity as well by incorporating data from ecological niche modeling software as a probability of establishment \cite{Strickland14}.
+
+\subsubsection{Function approximations and solving the inverse problem}
+
+\begin{figure}[b]
+\vspace{-10pt}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{N1K200t50_plotonly.pdf}
+\caption{Average of pseudo-random realizations for $P[Y(x)>0]$ (solid blue line) compared with homotopy model prediction through time 50. $K=200$ with a standard normal dispersal kernel.}
+\label{fig:homotopy}
+\end{center}
+\vspace{-20pt}
+\end{figure}
+
+Our model includes one term that must be cast as an unknown function of the presence probability and reconstructed. Rough approximations were found analytically and perform reasonably well under certain conditions. To obtain better approximations, we generated data for presence probability based on stochastic simulations and solved the ill-posed inverse problem using generalized Tikhonov regularization. We then matched long-term behavior with transients by applying a homotopy relation. Though the result is highly sensitive to parameter selection due to non-local effects, Fig. \ref{fig:homotopy} demonstrates the reconstruction accuracy that is achievable via this method.
+
+\subsubsection{Network model}
+
+Modern landscapes rarely exist without some kind of transportation infrastructure, even in the case of preserves and natural parks. Roads and trails effectively connect otherwise distant locations and can facilitate the movement of an invader along their length. Assuming a general, spatially continuous spread model has been specified, we formulated a general method for attaching a network in the form of a system of coupled ordinary differential equations (Eqn. \ref{eqn:SIY} in appendix) that describe dynamics for susceptible and disease carrying vectors traveling from node to node. For an herbaceous invader, there should also be some latency between network transportation and growth so we augment this model with an intermediate, spatially continuous latent step that realizes this dynamic. It is this formulation of the network model that is represented in Fig. \ref{fig:RMNP}, where we model the spread of cheatgrass in Rocky Mountain National Park including observed presence locations for validation \cite{Strickland15}. We have also considered various control regimes and made the full Python code for this project available on GitHub.
+
+
+\subsection{Modeling Parasitoid Wasp Dispersal from Point Release}
+
+\begin{figure}[b]
+\vspace{-10pt}
+\begin{center}
+\includegraphics[width=\textwidth]{results.png}
+\caption{Model results for parasitoid numbers on data collection days (a-c) and predicted emergence (d).}
+\label{fig:parasitoids}
+\end{center}
+\vspace{-20pt}
+\end{figure}
+
+Biological invasions have movement at the core of their success. However, due to difficulties in collecting data, medium- and long-distance dispersal of small insects and seeds has long been poorly understood and likely underestimated. Data collected on the agricultural introduction of a previously absent species of parasitoid wasp, \textit{Eretmocerus hayati}, in a hierarchical sampling design and over an area measured in kilometers \cite{Kristensen13} represents a special opportunity to reveal and study the key mechanisms behind tiny insect dispersal. To begin this process, we formulated a probabilistic model resulting in a special case of the Fokker-Planck equation (Eqn. \ref{eqn:FP} in appendix) which admits an analytic solution. Local, near-ground movement is modeled using simple diffusion while wind-based flight includes both an active and passive component: wasps may preferentially choose a take-off time based on environmental conditions but then float on the wind, which is assumed spatially but not temporally constant (Eqn. \ref{eqn:sum} in appendix).
+
+\subsubsection{Bayesian framework and scientific computation}
+
+To fit model parameters to field data in a robust way, it was necessary to superimpose a second, probabilistic framework onto the dispersal model that could describe multiple data collection methodologies at different scales while accounting for uncertainty. In particular, the statistical model had to correctly match geospatial data to locations within the model of different shapes and sizes while projecting estimated population density to subsequent adult emergences from the host species. After specifying some initial information about the expected value of parameters as prior distributions, we could then seek the parameters that maximize the probability of observing the data given the model and eventually quantify the uncertainty in those parameter choices as well. As this process involves a high-dimensional nonlinear optimization problem, methods typically involve Monte Carlo algorithms and necessitate fast evaluation of the model in order to obtain thousands of realizations from the parameter space.
+
+The multiscale nature of this model presents significant challenges in terms of computational speed because spatial resolution must be fine enough to capture local movement of wasps $<1$ mm in size while working on a domain over 100 km$^2$ in size. To address this problem, we utilized a two-pronged approach. The probability distribution for each day's movement was assumed to be independent and thus calculated in parallel. The distributions were then combined using an FFT convolution implemented on a GPU using CUDA Python libraries \cite{pycuda}. Numerical Python was used throughout the implementation with the goal of producing transparent and reusable code with high performance metrics. Fig. \ref{fig:parasitoids} shows results using the maximum a posteriori parameter estimates.
+
+\subsection{Savanna Modeling}
+\label{sec:savanna}
+
+\begin{wrapfigure}{R}{0.5\textwidth}
+\vspace{-25pt}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{Savanna_Climate.pdf}%{nofire_rs.png}
+\vspace{-5pt}
+\caption{Climate effect on tree population by location and woody biomass.}
+\label{fig:climate}
+\vspace{-20pt}
+\end{center}
+\end{wrapfigure}
+Modeling is a vital part of savanna research as ecologists must rely on models to explore stand compositional changes across generations and the dynamics of tree and grass coexistence dictates how savanna will respond to various forms of disturbance (climate change, grazing livestock, fuel-wood harvest, etc.). However, there is currently no consensus as to why savanna occurs as a stable state between tropical grassland and forest. Numerous models have been suggested to address this problem, but often they take the form of process-based software simulations that are mathematically intractable and difficult to analyze. In collaboration with savanna ecologists Adam Liedloff and Garry Cook \cite{Liedloff07} of the Commonwealth Scientific and Industrial Research Organization (CSIRO) lab at Darwin, Australia, we developed an ODE-based model to explore the interaction between seasonal resource availability, fire disturbance, and stand structure in Australian savannas. The model shows how changes in climate seasonality and fire disturbance may effect woody biomass and seedling growth over centuries-long time scales \cite{Strickland14}.
+
+\subsubsection{Modeling approach and computational analysis}
+
+To correctly account for the stability of mesic Australian savannas, special attention was paid to modeling water resource availability based on soil properties, rooting depth, and daily rainfall history. The soil system was imagined as a cascading bucket model, where water flows downward through successive layers that grant different access to grasses and trees based on rooting depth or niche access. Tree population was modeled using an age-structured approach that allowed us examine structural dynamics and apply a non-uniform susceptibility to fire. The end result was a system of ordinary differential equations coupled with a discrete-time model for advancing monthly age classes (Eqn. \ref{eqn:GamRGT} in appendix).
+
+For analyzing the behavior of our system over long time scales, we utilized a Markov chain model for stochastic daily rainfall generation that was parameterized by location specific precipitation records. Our results revealed a long term oscillation for stand structure based on seedling cohorts which advance into maturity when woody biomass decreases and resources become available. However, we also showed that this oscillation is likely noisy and less well defined on the stand scale due to a spatial resource niche for seedlings that keeps total basal area roughly constant at a location specific climatic equilibrium. Using another discrete-time Markov process with absorbing boundary condition, we provided a method for approximating the probability distribution for drought stress and thus the basal area climatic equilibrium (see Fig. \ref{fig:climate}; this figure was generated using Lincoln Laboratory's MatlabMPI \cite{MatlabMPI} to examine the parameter space in parallel on a cluster). We then examined the effects of fire as a stochastic perturbation away from underlying climatic equilibrium states \cite{Strickland14}.
+
+\section{Future work}
+\label{sec:future}
+
+An area that I am particularly targeting for future research are fluid dynamics extensions to our work on parasitoid wasp dispersal and modeling network dispersal within the context of social traits and/or demographics. Results (such as Fig. \ref{fig:parasitoids}) comparing maximum a posteriori model results to field data make a clear case that while a spatially homogenous wind approximation may be sufficient to model parasitoid dispersal on local scales, it is insufficient to reproduce observed results at distances over 1 km away from the release point, at least in directions perpendicular to the average wind direction. Using techniques from computational fluid dynamics \cite{Battista16}, we propose to extend the model by considering nonlinear and spatially inhomogenous wind patterns and variable flight time. We also have plans to extend the model to marine environments and to examine parasitoid flight characteristics in the lab using a wind tunnel.
+
+Network dynamics is an area of great interest to me, and one that I see myself devoting more time to in my future work. In particular, I have recently started a project that uses a novel method for generating network models to mechanistically examine the spread of ideas within a social community. There are also plans to consider in more detail the network spread of a pathogen in an epidemiological context, based on my work on the spread of cheatgrass \cite{Strickland15}. Finally, I continue to work with my Ph.D. advisor Patrick Shipman on various projects that utilize tools from mathematical ecology to numerically explore biological systems known to produce patterns \cite{Shipman13,Pearson16}.
+
+\small
+\bibliographystyle{acm}
+\bibliography{ResearchBib3}
+
+\newpage
+\appendix
+
+\paragraph{Mollison's Simple Epidemic.} Consider a set of nonnegative integer-valued populations $Y_i(t)$ occupying a finite or countably infinite set of cells labeled by indices $i\in\mathcal{L}$, $\mathcal{L}$ an index set. Assume that the $Y_i$ evolve stochastically in time $t$ according to a contact-birth process \cite{Mollison77} defined by the transition rates
+\begin{equation}
+\lim_{\tau\rightarrow 0}\Big(\frac{1}{\tau}\mbox{Pr}[Y_i\rightarrow Y_i+1\;\mbox{in}\;(t,t+\tau)]\Big)=r\overline{Y}_i(1-\frac{Y_i}{K}),
+\label{eqn:transition-rate}
+\end{equation}
+where $r>0$, $\overline{Y}_i=\sum_{j\in\mathcal{L}}W_{ij}Y_j$, and $W_{ij}$ is a stochastic matrix representing the probability that an individual located in cell $j$ gives birth to a new individual in cell $i$. This process is called the ``simple epidemic.''
+
+\paragraph{Presence Probability Model.} Let $Y(x,t)$ be the population within a defined area around location $x$ at time $t$, and let $u(x,t)=\Pr[Y(x,t)>0]$. Our derived model for presence probability is
+\begin{equation}
+\frac{\partial u(x,t)}{\partial t} = rs(x)(1-u(x,t))\int_\Omega E[Y(s,t)|Y(x,t)=0]w(x-s)ds,
+\label{eqn:suitmodel}
+\end{equation}
+where $s(x)$ is the suitability of the environment at location $x$ for the growth of $Y$ and $E$ denotes the expected value. $w(x)$ is the seed dispersal kernel. We look for approximations of $E[Y|Y(x,t)>0]$ as a function of $u$.
+
+\paragraph{Network Invasion Model.} Let $Y(x,t)$ be the infected (non-network) target population over a location space $\Omega$ at time $t$, which obeys a spread model $\partial Y / \partial t = F(Y,x)$. Then we attach a carrier network via
+\begin{align}
+\frac{d\bv{s}}{dt} &= [H - \diag(\bsy\beta(Y))]\bv{s} + (\bsy\nu\bsy\mu^T)\bv{c}\nonumber\\
+\frac{d\bv{c}}{dt} &= \diag(\bsy\beta(Y))\bv{s} + (G - \diag(\bsy\mu))\bv{c} \nonumber\\
+\frac{\partial Y}{\partial t} &= F(Y,x, r\bv{w}(x)\cdot\bv{c}) \label{eqn:SIY}\\
+\bsy\beta(Y) &= \gamma\int_\Omega Y(x,t)\bv{w}(x)dx\nonumber\\
+\bv{s}(0) &= \bv{s}_0,\ \ \bv{c}(0) = \bv{c}_0,\ \ Y(x,0) = Y_0(x),\nonumber
+\end{align}
+where $G$ is a matrix of network transition rates, $\bv{s}$ and $\bv{c}$ are susceptible and carrying disease vectors respectively, $\bsy\beta$ is a vector of infection rates at each network node, $\bsy\mu$ is the rate carriers leave the network at each node (balanced by susceptibles entering), and $\bsy\nu$ is the probability that new susceptibles enter at each node (sums to 1). $H = G - \diag(\bsy\mu) + \bsy\nu\bsy\mu^T$.
+
+\paragraph{Parasitoid Wasp Disperal.} We assume that the probability density $p(\bv{x},t)$ describing the position $\bv{x}$ of a wasp at time $t$ (in hours) which begins at the origin and takes a wind-based flight from time $t_0$ to time $t_0+\Delta t$ obeys a special form of the Fokker-Planck equation
+\begin{equation}
+\left.\frac{\partial p_w(\bv{x},t)}{\partial t}\right|_{t=t_0}^{t=t_0+\Delta t} = -\sum_{i=1}^2\frac{\partial}{\partial x_i}[\mu_i(\bv{w}(t))p_w(\bv{x},t)] + \frac{1}{2}\sum_{i=1}^2\sum_{j=1}^2 \frac{\partial^2}{\partial x_i\partial x_j}[D_{ij}p_w(\bv{x},t)],\label{eqn:FP}
+\end{equation}
+where $\bv{w}(t)$ is the wind velocity at time $t$, assumed to be spatially homogenous, $\bsy\mu$ relates wind velocity to flight drift, and $D$ is a diffusion tensor. The position density for a wasp at the end of a full day is a weighted average between wind-based flight and local flight based on conditions measured by $h(t_0,\bv{w}(t_0))$ at each $t_0$,
+\begin{align}
+p(\bv{x}) &= \int_0^{24}h(t_0,\bv{w}(t_0))dt_0p_w(\bv{x},t) + \left(1-\int_0^{24}h(t_0,\bv{w}(t_0))dt_0\right)p_l(\bv{x},t)\label{eqn:sum}\\
+&\mbox{where}\ \ \ \frac{\partial p_l(\bv{x},t)}{\partial t} = \frac{1}{2}\sum_{i=1}^2\sum_{j=1}^2 \frac{\partial^2}{\partial x_i\partial x_j}[\tilde{D}_{ij}p(\bv{x},t)].\nonumber
+\end{align}
+
+\paragraph{Savanna Model.}
+\begin{align}
+\frac{d\Gamma}{dt} &= f(t)(1-\heavi(\Gamma - V_\Gamma)) - \delta\heavi(\Gamma-F_\Gamma)(1-\heavi(R-V_R)) - \epsilon\heavi(\Gamma-E_\Gamma)-(\gamma G+\bsy\omega\cdot\bv{T})\heavi(\Gamma)\nonumber\\
+\frac{dR}{dt} &= \delta \heavi(\Gamma-F_\Gamma)(1-\heavi(R-V_R)) - \bsy\omega\cdot\bv{T}_m(1-\heavi( \Gamma))\heavi(R)\nonumber\\
+\frac{dG}{dt} &= g\heavi(\Gamma)-cG(1-\heavi(\Gamma))\label{eqn:GamRGT}\\
+T_{i,m+1} &=
+\begin{cases}
+T_{i-1,m}(1 - \mu_{i-1})^{\Delta_m}(1-\nu_{i-1}) &\mbox{if } i > \sigma\\
+T_{i-1,m}(1 - \mu_{i-1})^{\Theta_m}(1-\nu_{i-1}) &\mbox{if } 0<i\leq\sigma\\
+s(m) &\mbox{if } i=0
+\end{cases}\nonumber
+\end{align}
+where:
+\begin{itemize}
+\item $\Gamma = $ topsoil water with $F_\Gamma = $ field capacity, $E_\Gamma = $ evaporation depth, $V_\Gamma = $ saturation capacity
+\item $R = $ subsoil water with $V_R = $ subsoil capacity, $V_S = $ seedling rooting depth
+\item $G = $ grass biomass in tonnes with $g = $ grass growth rate, $c = $ grass death rate
+\item $\bv{T} = $ finite vector of trees belonging to uniform basal area classes, $f(t) = $ rainfall
+\item $\gamma,\bsy\omega,\delta,\epsilon = $ water usage and rate constants
+\item $\heavi(x) =
+\begin{cases}
+0 &\mbox{if } x\leq 0\\
+1 &\mbox{if } x>0
+\end{cases}$
+\item $m$ is an index of monthly time-steps, $\Delta_m = $ days in month $m$ that $\Gamma=R=0$, $\Theta_m = $~days in month $m$ that $\Gamma=0$ and $R<V_R-V_S$
+\item $\mu,\nu = $ death rates due to drought and other causes, respectively
+\item $\sigma = $ largest ``seedling'' size class, $s(m)$ seedling recruitment in month $m$
+\end{itemize}
+\end{document} 
