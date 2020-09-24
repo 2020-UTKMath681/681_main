@@ -15,11 +15,17 @@ def main(task,A=None):
     matrix is dependent on A. A must be square.
     '''
 
+    # Never use a mutable object as a default value! If you want a mutable object
+    #   to be the default value for a function argument, set the default to "None"
+    #   and then check for it as is done below.
     if A is None:
         A = np.eye(5)
     else:
-        assert A.shape[0]==A.shape[1], "A must be a square matrix."
+        # If we're not using the default, make sure the user provided matrix is square
+        assert A.shape[0]==A.shape[1], "The provided matrix must be square."
 
+    # Check the value of task and call the appropriate function, printing the output
+    #   If a string that is not recognized is passed, throw an error to stop execution.
     if task == 'diag':
         print(diag_func(A))
     elif task == 'corners':
@@ -40,9 +46,10 @@ def corners_func(mat):
     '''Add 1 to each corner of the matrix'''
 
     newmat = np.array(mat) # get a copy so we are not overwriting mat
+    # since it's only four values that need changing, loop over them.
     for r in [0,-1]:
         for c in [0,-1]:
-            newmat[r,c] += 1
+            newmat[r,c] += 1 # shorthand for newmat[r,c] = newmat[r,c] + 1
     return newmat
 
 
