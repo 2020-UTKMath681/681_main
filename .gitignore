@@ -1,6 +1,9 @@
 ## VS Code files
 /.vscode
 
+## Python cache
+/__pycache__
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
