@@ -22,7 +22,12 @@ def main(task,A=None):
         A = np.eye(5)
     else:
         # If we're not using the default, make sure the user provided matrix is square
-        assert A.shape[0]==A.shape[1], "The provided matrix must be square."
+        try:
+            assert A.shape[0]==A.shape[1], "The provided matrix must be square."
+        except AttributeError:
+            A = np.array(A)
+            print("List fixed!")
+            assert A.shape[0]==A.shape[1], "The provided matrix must be square."
 
     # Check the value of task and call the appropriate function, printing the output
     #   If a string that is not recognized is passed, throw an error to stop execution.
@@ -44,7 +49,6 @@ def diag_func(mat):
 
 def corners_func(mat):
     '''Add 1 to each corner of the matrix'''
-
     newmat = np.array(mat) # get a copy so we are not overwriting mat
     # since it's only four values that need changing, loop over them.
     for r in [0,-1]:
@@ -61,4 +65,4 @@ def mult5_func(mat):
 
 if __name__ == "__main__":
     # If run from the command line, print the default 'diag' result
-    main('diag')
+    main('corners')
