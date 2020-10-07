@@ -1,8 +1,14 @@
 '''
-This script demonstrates function calls and structure
+This script demonstrates function calls and structure.
+
+It also demonstrates globals, and can be used to see how an imported module
+is also an object.
 '''
 
 import numpy as np
+
+global_A = 2.3
+global_B = "spam and eggs"
 
 def main(task,A=None):
     '''
@@ -11,6 +17,7 @@ def main(task,A=None):
     - task='diag': I + a matrix of ones on the sub and super diagonal
     - task='corners': I + a matrix of ones on the corners
     - task='mult5': I*5
+    - task='multglb': I*global_A (and reassignment of global_B)
     If a matrix A is passed in, I is replaced with A and the size of the output
     matrix is dependent on A. A must be square.
     '''
@@ -37,6 +44,8 @@ def main(task,A=None):
         print(corners_func(A))
     elif task == 'mult5':
         print(mult5_func(A))
+    elif task == 'multglb':
+        print(multglb_func(A))
     else:
         raise RuntimeError("Task not defined.")
 
@@ -61,6 +70,16 @@ def mult5_func(mat):
     '''Multiply the matrix by 5'''
 
     return mat*5
+
+
+def multglb_func(mat):
+    '''Multipy by the global variable global_A. Also assign the 
+    global_B variable a new value'''
+
+    global global_B
+    global_B = 'multiplication!'
+
+    return mat*global_A
 
 
 if __name__ == "__main__":
