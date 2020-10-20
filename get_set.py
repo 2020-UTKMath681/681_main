@@ -23,7 +23,7 @@ class clip_x:
         return self.__x # two underscores are convention for "private"
 
 
-    @x.setter # This decorator makes this method a getter for property x
+    @x.setter # This decorator makes this method a setter for property x
     def x(self, x):
         # note that x inside this function refers to the argument
         if x < 0:
