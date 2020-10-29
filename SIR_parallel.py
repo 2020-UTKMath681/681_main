@@ -28,7 +28,7 @@ p_name = 'beta'
 
 def main(pool):
     # parameter values to loop over
-    p_vals = np.linspace(0,1.5,401)
+    p_vals = np.linspace(0,1.5,4001)
 
     # apply this new function to all our p_vals and collect the results
     results = pool.map(solve_ODEs, p_vals)

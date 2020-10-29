@@ -4,6 +4,10 @@
 ## Python cache
 /__pycache__
 
+## sensitivity output
+param_sens_*.pdf
+*.h5
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
