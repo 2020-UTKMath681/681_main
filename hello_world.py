@@ -15,4 +15,10 @@ print(z)
 a = 2
 print(a)
 
+# features!
+print("here is a new feature!")
+mult_result = x*y
+print(mult_result)
+# rarara
+
 assert A.shape == (3,2), "Wrong shape for array A!"
