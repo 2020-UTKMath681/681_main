@@ -6,9 +6,8 @@ import numpy as np
 print("Hello World!")
 print("Hello again!")
 
-
 x = 1
-y = 1
+y = 0
 A = np.array([[1,2,3],[4,5,6]])
 z = x+y
 print(z)
