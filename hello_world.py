@@ -7,8 +7,8 @@ print("Hello World!")
 print("Hello again!")
 
 
-x = 3.4
-y = 7.8
+x = 1
+y = 1
 A = np.array([[1,2,3],[4,5,6]])
 z = x+y
 print(z)
